@@ -1,0 +1,1 @@
+export const GraphQLSchemaPath = './wesovi-schema.graphql';
