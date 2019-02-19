@@ -50,7 +50,7 @@ export const listMovies = (parentValue, args, ctx) => {
             return e
         });
 
-}
+};
 
 export const getMovie = (parentValue, {movieId}, ctx) => {
     return db.query('SELECT * FROM movies WHERE id=$1', [movieId])
@@ -68,7 +68,7 @@ export const getMovie = (parentValue, {movieId}, ctx) => {
             return e
         });
 
-}
+};
 
 export const getActorsForMovie = (movieId, total) => {
     return db.query('SELECT a.*, ma.movie_character FROM actors  a, movies_actors ma WHERE ma.movie_id=$1 AND ma.actor_id=a.id LIMIT $2', [movieId, total])
@@ -86,7 +86,7 @@ export const getActorsForMovie = (movieId, total) => {
             console.error(e.stack)
             return e
         });
-}
+};
 
 export const getDirectorForMovie = (movieId) => {
     return db.query('SELECT d.* FROM directors AS d, movies as M WHERE m.id =$1 AND m.director_id=d.id', [movieId])
@@ -101,4 +101,4 @@ export const getDirectorForMovie = (movieId) => {
             console.error(e.stack)
             return e
         });
-}
+};
