@@ -1,0 +1,15 @@
+{
+  "database": {
+    "host": "database",
+    "port": 5432,
+    "name": "workshop",
+    "user": "workshop",
+    "password": "graphql"
+  },
+  "graphql": {
+    "schema": "/opt/config/workshop.graphql"
+  },
+  "server": {
+    "port": 9001
+  }
+}

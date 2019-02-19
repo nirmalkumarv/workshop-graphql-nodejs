@@ -1,19 +1,26 @@
-import {login} from './users/resolvers';
+import {getActorsForMovie, getDirectorForMovie, listDirectors, listActors, listMovies, getMovie} from './queries';
+import {addMovie, addActor, deleteActor} from './mutations';
 
 
 export default {
-    Query: {
-        hi: () => {
-            return "hi";
+    Movie: {
+        director: async ({id}) => {
+            console.log(id)
+            return await getDirectorForMovie(id)
         },
-        person: (_, args, {user}) => {
-            return {
-                name: user,
-                fee: 125.23,
-            }
+        actors: async ({id}, {total}) => {
+            return await getActorsForMovie(id, total)
         }
     },
+    Query: {
+        listDirectors,
+        listActors,
+        listMovies,
+        getMovie,
+    },
     Mutation: {
-        login
+        addMovie,
+        addActor,
+        deleteActor,
     }
 }

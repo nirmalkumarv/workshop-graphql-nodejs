@@ -1,0 +1,57 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    listDirectors:[Director!]
+    listActors:[Actor!]
+    listMovies:[Movie!]
+    getMovie(movieId:ID!):Movie
+}
+
+type Mutation {
+    addMovie(request:MovieRequest):Movie!
+    addActor(request:ActorRequest):Actor!
+    deleteActor(actorId:ID!):[Actor!]
+}
+
+input MovieRequest {
+    title: String!
+    year: Int
+    genre: String!
+    budget: Float!
+    thriller: String
+    directorId: ID!
+}
+
+type Movie {
+    id: ID!
+    title: String!
+    year: Int
+    genre: String
+    budget: Float
+    thriller: String
+    director: Director!
+    actors(total:Int=1): [Actor!]
+}
+
+
+type Director{
+    id: ID!
+    fullName: String!
+    country: String
+}
+
+input ActorRequest {
+    fullName: String!
+    birthday: String
+}
+
+
+type Actor {
+    id: ID!
+    fullName: String!
+    birthday: String
+    character: String
+}

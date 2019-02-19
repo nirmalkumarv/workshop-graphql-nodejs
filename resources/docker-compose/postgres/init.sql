@@ -38,35 +38,35 @@ CREATE TABLE movies_actors (
 
 COMMIT;
 
-INSERT INTO actors(id,full_name,birth_date)
-    VALUES (1,'Johnny Depp','06-09-1963');
-INSERT INTO actors(id,full_name,birth_date)
-    VALUES (2,'Winona Ryder','10-29-1971');
-INSERT INTO actors(id,full_name,birth_date)
-    VALUES (3,'Russell Crowe','04-07-1964');
-INSERT INTO actors(id,full_name,birth_date)
-    VALUES (4,'Joaquin Phoenix','10-28-1974');
-INSERT INTO actors(id,full_name,birth_date)
-    VALUES (5,'Al Pacino','04-25-1940');
-INSERT INTO actors(id,full_name,birth_date)
-    VALUES (6,'Robert de Niro','08-17-1943');
+INSERT INTO actors(full_name,birth_date)
+    VALUES ('Johnny Depp','06-09-1963');
+INSERT INTO actors(full_name,birth_date)
+    VALUES ('Winona Ryder','10-29-1971');
+INSERT INTO actors(full_name,birth_date)
+    VALUES ('Russell Crowe','04-07-1964');
+INSERT INTO actors(full_name,birth_date)
+    VALUES ('Joaquin Phoenix','10-28-1974');
+INSERT INTO actors(full_name,birth_date)
+    VALUES ('Al Pacino','04-25-1940');
+INSERT INTO actors(full_name,birth_date)
+    VALUES ('Robert de Niro','08-17-1943');
 
 COMMIT;
 
-INSERT INTO directors(id,full_name,country) VALUES (1,'Tim Burton', 'USA' );
-INSERT INTO directors(id,full_name,country) VALUES (2,'James Cameron', 'Canada');
-INSERT INTO directors(id,full_name,country) VALUES (3,'Steven Spielberg', 'USA');
-INSERT INTO directors(id,full_name,country) VALUES (4,'Martin Scorsese', 'USA');
-INSERT INTO directors(id,full_name,country) VALUES (5,'Alfred Hitchcock', 'UK');
-INSERT INTO directors(id,full_name,country) VALUES (6,'Clint Eastwood', 'USA');
-INSERT INTO directors(id,full_name,country) VALUES (7,'Ridley Scott', 'UK');
+INSERT INTO directors(full_name,country) VALUES ('Tim Burton', 'USA' );
+INSERT INTO directors(full_name,country) VALUES ('James Cameron', 'Canada');
+INSERT INTO directors(full_name,country) VALUES ('Steven Spielberg', 'USA');
+INSERT INTO directors(full_name,country) VALUES ('Martin Scorsese', 'USA');
+INSERT INTO directors(full_name,country) VALUES ('Alfred Hitchcock', 'UK');
+INSERT INTO directors(full_name,country) VALUES ('Clint Eastwood', 'USA');
+INSERT INTO directors(full_name,country) VALUES ('Ridley Scott', 'UK');
 COMMIT;
 
-INSERT INTO movies(id,title,release_year,genre,budget,thriller,director_id)
-    VALUES (1,'Edward Scissorhands',1990,'Sci-fi',20,'https://www.youtube.com/watch?v=M94yyfWy-KI',1);
+INSERT INTO movies(title,release_year,genre,budget,thriller,director_id)
+    VALUES ('Edward Scissorhands',1990,'Sci-fi',20,'https://www.youtube.com/watch?v=M94yyfWy-KI',1);
 
-INSERT INTO movies(id,title,release_year,genre,budget,thriller,director_id)
-    VALUES (2,'Gladiator',2000,'Drama',103,'https://www.youtube.com/watch?v=owK1qxDselE',7);
+INSERT INTO movies(title,release_year,genre,budget,thriller,director_id)
+    VALUES ('Gladiator',2000,'Drama',103,'https://www.youtube.com/watch?v=owK1qxDselE',7);
 COMMIT;
 
 INSERT INTO movies_actors(movie_id,actor_id,movie_character)

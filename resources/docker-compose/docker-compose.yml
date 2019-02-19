@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+
+  api:
+    image: wesovilabs/workshop-graphql-nodejs:local
+    ports:
+      - 9001:9001
+    depends_on:
+      - database
+    links:
+      - database
+    volumes:
+      - ./../../:/usr/src/app
+      - ./api/config.json:/opt/config/config.json
+      - ./../graphql/workshop.graphql:/opt/config/workshop.graphql
+    environment:
+      APP_CONFIG_PATH: /opt/config/config.json
+    command: npm start
+
+  database:
+    image: "postgres:10-alpine"
+    restart: always
+    ports:
+      - 5456:5432
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: "workshop"
+      POSTGRES_PASSWORD: "graphql"

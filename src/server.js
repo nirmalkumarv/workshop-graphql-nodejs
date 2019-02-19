@@ -7,10 +7,7 @@ import config from './config';
 const server = new ApolloServer({
     schema,
     context: ({req}) => {
-        const token = req.headers.authorization || '';
-        const user = req.user.username;
-        const roles = req.user.roles;
-        return {user, roles};
+
     }
 });
 server.applyMiddleware({app});

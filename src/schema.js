@@ -1,20 +1,15 @@
-import {importSchema} from 'graphql-import';
+const {importSchema} = require('graphql-import');
 import {makeExecutableSchema} from 'apollo-server-express';
 import resolvers from './resolvers';
-import {GraphQLSchemaPath} from './constants';
-import AuthDirective from "./directives";
+import config from './config';
 
 
-const typeDefs = importSchema(GraphQLSchemaPath);
-console.log(typeDefs)
+const typeDefs = importSchema(config.get('graphql.schema'));
+
 export default makeExecutableSchema({
     typeDefs,
     resolvers,
-    context: ({req}) => ({
-        authScope: getScope(req.headers.authorization)
-    }),
-    schemaDirectives: {
-        auth: AuthDirective
-    },
+    context: ({req}) => ({}),
+    schemaDirectives: {},
     resolverValidationOptions: {requireResolversForResolveType: false},
 });
