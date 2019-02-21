@@ -8,6 +8,24 @@ schema {
 
 }
 
+"""This type is used for defining url's"""
+scalar Url
+
+"""Possible values for gender"""
+enum Gender {
+    male
+    female
+}
+
+"""Possible values for movie genres"""
+enum Genre {
+    Drama
+    SciFi
+    Comedy
+    Terror
+    Action
+}
+
 """Available queries for Workshop API"""
 type Query {
     """It returns the list of directors."""
@@ -44,11 +62,11 @@ input MovieRequest {
     "Year when the movie was released"
     year: Int
     "Genre for the movie, supported values should be: SciFi, Drama, Comedy or Action"
-    genre: String
+    genre: Genre
     "Budget for the movie, the value is provided in Euro"
     budget: Float!
     "URL in which we can watch the thriller of this movie"
-    thriller: String
+    thriller: Url
     "Identifier of director"
     directorId: ID!
 }
@@ -62,11 +80,11 @@ type Movie {
     "Year when the movie was released"
     year: Int
     "Genre for the movie, supported values should be: SciFi, Drama, Comedy or Action"
-    genre: String
+    genre: Genre
     "Budget for the movie, the value is provided in Euro"
     budget: Float!
     "URL in which we can watch the thriller of this movie"
-    thriller: String
+    thriller: Url
     "The director details of the movie"
     director: Director!
     "List of actors for the movie"
@@ -87,8 +105,10 @@ type Director{
 input ActorRequest {
     "Full name of the director"
     fullName: String!
-    "Date when the actor was born"
-    age: String
+    "Country in which the actor was born"
+    country: String
+    "Gender of actor: Supported values are male or female"
+    gender: Gender
 }
 
 """Actor details"""
@@ -100,5 +120,5 @@ type Actor {
     "Country in which the actor was born"
     country: String
     "Gender of actor: Supported values are male or female"
-    gender: String
+    gender: Gender
 }
