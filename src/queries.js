@@ -17,6 +17,7 @@ export const listDirectors = (parentValue, args, ctx) => {
 };
 
 export const listActors = (parentValue, args, ctx) => {
+    console.log('demo')
     return db.query('SELECT * FROM actors')
         .then(res => {
             return res.rows.map(a => {
@@ -70,15 +71,14 @@ export const getMovie = (parentValue, {movieId}, ctx) => {
 
 };
 
-export const getActorsForMovie = (movieId, total) => {
-    return db.query('SELECT a.*, ma.movie_character FROM actors  a, movies_actors ma WHERE ma.movie_id=$1 AND ma.actor_id=a.id LIMIT $2', [movieId, total])
+export const listActorsForMovie = (movieId, total) => {
+    return db.query('SELECT a.* FROM actors  a, movies_actors ma WHERE ma.movie_id=$1 AND ma.actor_id=a.id LIMIT $2', [movieId, total])
         .then(actors => {
             return actors.rows.map(a => {
                 return {
                     id: a.id,
                     fullName: a.full_name,
                     birthday: a.birth_date,
-                    character: a.movie_character,
                 }
             })
 

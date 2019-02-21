@@ -9,7 +9,11 @@ const typeDefs = importSchema(config.get('graphql.schema'));
 export default makeExecutableSchema({
     typeDefs,
     resolvers,
-    context: ({req}) => ({}),
+    context: ({req}) => {
+        if (req) {
+            userEmail: req.headers.UserEmail
+        }
+    },
     schemaDirectives: {},
     resolverValidationOptions: {requireResolversForResolveType: false},
 });

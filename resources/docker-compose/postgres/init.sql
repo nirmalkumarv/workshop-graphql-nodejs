@@ -32,8 +32,14 @@ CREATE TABLE IF NOT EXISTS actors (
 CREATE TABLE movies_actors (
   movie_id          INT NOT NULL CONSTRAINT fk_movies_actors_movie REFERENCES movies(id),
   actor_id          INT NOT NULL CONSTRAINT fk_movies_actors_actor REFERENCES actors(id),
-  movie_character   VARCHAR(128),
   CONSTRAINT pk_movies_actors PRIMARY KEY (movie_id, actor_id)
+);
+
+CREATE TABLE movies_rates (
+  movie_id          INT NOT NULL CONSTRAINT fk_movies_rates_movie REFERENCES movies(id),
+  email             VARCHAR(128) NOT NULL,
+  score             INT NOT NULL,
+  CONSTRAINT pk_movies_rates PRIMARY KEY(movie_id, email)
 );
 
 COMMIT;
@@ -63,20 +69,20 @@ INSERT INTO directors(full_name,country) VALUES ('Ridley Scott', 'UK');
 COMMIT;
 
 INSERT INTO movies(title,release_year,genre,budget,thriller,director_id)
-    VALUES ('Edward Scissorhands',1990,'Sci-fi',20,'https://www.youtube.com/watch?v=M94yyfWy-KI',1);
+    VALUES ('Edward Scissorhands',1990,'SciFi',20,'https://www.youtube.com/watch?v=M94yyfWy-KI',1);
 
 INSERT INTO movies(title,release_year,genre,budget,thriller,director_id)
     VALUES ('Gladiator',2000,'Drama',103,'https://www.youtube.com/watch?v=owK1qxDselE',7);
 COMMIT;
 
-INSERT INTO movies_actors(movie_id,actor_id,movie_character)
-    VALUES(1,1,'Edward Scissorhands');
-INSERT INTO movies_actors(movie_id,actor_id,movie_character)
-    VALUES(1,2,'Kim Boggs');
-INSERT INTO movies_actors(movie_id,actor_id,movie_character)
-    VALUES(2,3,'Maximus');
-INSERT INTO movies_actors(movie_id,actor_id,movie_character)
-    VALUES(2,4,'Commodus');
+INSERT INTO movies_actors(movie_id,actor_id)
+    VALUES(1,1);
+INSERT INTO movies_actors(movie_id,actor_id)
+    VALUES(1,2);
+INSERT INTO movies_actors(movie_id,actor_id)
+    VALUES(2,3);
+INSERT INTO movies_actors(movie_id,actor_id)
+    VALUES(2,4);
 COMMIT;
 
 

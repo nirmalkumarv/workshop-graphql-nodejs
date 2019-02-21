@@ -6,14 +6,10 @@ import config from './config';
 
 const server = new ApolloServer({
     schema,
-    context: ({req}) => {
-
-    }
 });
 server.applyMiddleware({app});
 const httpServer = createServer(app);
 server.installSubscriptionHandlers(httpServer);
-
 const serverPort = config.get('server.port');
 
 httpServer.listen({port: serverPort}, () => {

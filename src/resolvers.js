@@ -1,5 +1,6 @@
-import {getActorsForMovie, getDirectorForMovie, listDirectors, listActors, listMovies, getMovie} from './queries';
+import {listActorsForMovie, getDirectorForMovie, listDirectors, listActors, listMovies, getMovie} from './queries';
 import {addMovie, addActor, deleteActor} from './mutations';
+import {listenDirectorMovies} from './subscriptions';
 
 
 export default {
@@ -9,7 +10,7 @@ export default {
             return await getDirectorForMovie(id)
         },
         actors: async ({id}, {total}) => {
-            return await getActorsForMovie(id, total)
+            return await listActorsForMovie(id, total)
         }
     },
     Query: {
@@ -22,5 +23,8 @@ export default {
         addMovie,
         addActor,
         deleteActor,
+    },
+    Subscription: {
+        listenDirectorMovies,
     }
 }

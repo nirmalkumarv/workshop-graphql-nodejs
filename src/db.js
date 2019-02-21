@@ -1,7 +1,5 @@
 import config from './config';
-import {Pool,Client} from 'pg';
-
-
+import {Pool} from 'pg';
 
 const pool = new Pool({
     host: config.get('database.host'),
@@ -11,15 +9,6 @@ const pool = new Pool({
     password: config.get('database.password'),
 });
 
-
-
-const listDirectors = () => {
-    pool.query('SELECT * FROM directors', (err, res) => {
-        console.log(err, res)
-        pool.end()
-    })
-
-}
 
 const db = {
     query: (text, params) => pool.query(text, params)
