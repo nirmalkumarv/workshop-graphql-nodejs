@@ -109,6 +109,7 @@ input ActorRequest {
     country: String
     "Gender of actor: Supported values are male or female"
     gender: Gender
+
 }
 
 """Actor details"""
