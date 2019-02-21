@@ -1,6 +1,14 @@
-import {listActorsForMovie, getDirectorForMovie, listDirectors, listActors, listMovies, getMovie} from './queries';
-import {addMovie, addActor, deleteActor} from './mutations';
-import {listenDirectorMovies} from './subscriptions';
+import {
+    listActorsForMovie,
+    getDirectorForMovie,
+    listDirectors,
+    listActors,
+    listMovies,
+    getMovie,
+    getRateForMovie
+} from './queries';
+import {addMovie, addActor, deleteActor, rateMovie} from './mutations';
+import {listenDirectorMovies, listenRates} from './subscriptions';
 import {Url} from "./scalars";
 
 
@@ -13,6 +21,9 @@ export default {
         },
         actors: async ({id}, {total}) => {
             return await listActorsForMovie(id, total)
+        },
+        rate: async ({id}) => {
+            return await getRateForMovie(id)
         }
     },
     Query: {
@@ -25,8 +36,10 @@ export default {
         addMovie,
         addActor,
         deleteActor,
+        rateMovie,
     },
     Subscription: {
         listenDirectorMovies,
+        listenRates,
     }
 }

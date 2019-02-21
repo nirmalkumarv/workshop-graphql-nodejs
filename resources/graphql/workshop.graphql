@@ -46,12 +46,14 @@ type Mutation {
     addActor(request:ActorRequest):Actor!
     """I deletes an actor with the fiven identifier"""
     deleteActor("Identifier of the actor" actorId:ID!):[Actor!]
+    rateMovie(request:MovieRateRequest!):Movie!
 }
 
 """Available subscriptions for Workshop API"""
 type Subscription {
     """It returns the movies for a given director"""
     listenDirectorMovies(directorId:ID!):Movie!
+    listenRates(movieId:ID!):Movie!
 }
 
 
@@ -89,6 +91,7 @@ type Movie {
     director: Director!
     "List of actors for the movie"
     actors("Total of returned actors" total:Int=1): [Actor!]
+    rate:Float
 }
 
 """Director details"""
@@ -122,4 +125,10 @@ type Actor {
     country: String
     "Gender of actor: Supported values are male or female"
     gender: Gender
+}
+
+input MovieRateRequest {
+    movieId:ID!
+    userEmail:String!
+    score:Int!
 }

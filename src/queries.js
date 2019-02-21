@@ -17,7 +17,6 @@ export const listDirectors = (parentValue, args, ctx) => {
 };
 
 export const listActors = (parentValue, args, ctx) => {
-    console.log('demo')
     return db.query('SELECT * FROM actors')
         .then(res => {
             return res.rows.map(a => {
@@ -72,6 +71,23 @@ export const getMovie = (parentValue, {movieId}, ctx) => {
 
 };
 
+export const getRateForMovie = (movieId) => {
+    return db.query('SELECT score FROM movies_rates WHERE movie_id=$1', [movieId])
+        .then(rates => {
+            let score = 0.00
+            let count = 0
+            rates.rows.map(s => {
+                score += s.score
+                count += 1
+            })
+            return score / count
+
+        }).catch(e => {
+            console.error(e.stack)
+            return 0.00
+        });
+}
+
 export const listActorsForMovie = (movieId, total) => {
     return db.query('SELECT a.* FROM actors  a, movies_actors ma WHERE ma.movie_id=$1 AND ma.actor_id=a.id LIMIT $2', [movieId, total])
         .then(actors => {
@@ -93,7 +109,6 @@ export const listActorsForMovie = (movieId, total) => {
 export const getDirectorForMovie = (movieId) => {
     return db.query('SELECT d.* FROM directors AS d, movies as M WHERE m.id =$1 AND m.director_id=d.id', [movieId])
         .then(res => {
-            console.log(res)
             return {
                 id: res.rows[0].id,
                 fullName: res.rows[0].full_name,

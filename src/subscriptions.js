@@ -1,4 +1,4 @@
-import {ON_NEWMOVIE, pubsub} from "./events";
+import {ON_MOVIERATE, ON_NEWMOVIE, pubsub} from "./events";
 
 
 export const listenDirectorMovies = {
@@ -8,10 +8,18 @@ export const listenDirectorMovies = {
         }
     ),
     resolve: (payload, args, context, info) => {
-        console.log(payload)
-        console.log(args)
-        console.log(context)
-        console.log(info)
         return payload;
     }
 }
+
+export const listenRates = {
+    subscribe: (
+        (_, {movieId}) => {
+            return pubsub.asyncIterator(`${ON_MOVIERATE}.${movieId}`);
+        }
+    ),
+    resolve: (payload, args, context, info) => {
+        return payload;
+    }
+}
+

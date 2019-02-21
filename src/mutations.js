@@ -1,6 +1,6 @@
 import db from "./db";
 import {getMovie, listActors} from "./queries";
-import {ON_NEWMOVIE, pubsub} from "./events";
+import {ON_NEWMOVIE,ON_MOVIERATE, pubsub} from "./events";
 
 export const addMovie = (parentValue, {request}, ctx) => {
     return db.query("INSERT INTO movies(title,release_year,genre,budget,thriller,director_id) " +
@@ -42,3 +42,17 @@ export const deleteActor = (parentValue, {actorId}, ctx) => {
             return e
         });
 };
+
+export const rateMovie = (parentValue, {request}, ctx) => {
+    return db.query("INSERT INTO movies_rates(movie_id,email,score) " +
+        "VALUES ($1,$2,$3)",
+        [request.movieId, request.userEmail, request.score])
+        .then(a => {
+            let movie = getMovie({}, {movieId: request.movieId}, {})
+            pubsub.publish(`${ON_MOVIERATE}.${request.movieId}`, movie);
+            return movie
+        }).catch(e => {
+            console.error(e.stack)
+            return e
+        });
+}
