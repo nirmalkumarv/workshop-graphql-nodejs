@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS movies (
 CREATE TABLE IF NOT EXISTS actors (
   id            SERIAL PRIMARY KEY,
   full_name     VARCHAR(128),
-  birth_date    DATE,
+  country       VARCHAR(128),
+  male          BOOL,
   CONSTRAINT uq_actor UNIQUE (full_name)
 );
 
@@ -44,18 +45,18 @@ CREATE TABLE movies_rates (
 
 COMMIT;
 
-INSERT INTO actors(full_name,birth_date)
-    VALUES ('Johnny Depp','06-09-1963');
-INSERT INTO actors(full_name,birth_date)
-    VALUES ('Winona Ryder','10-29-1971');
-INSERT INTO actors(full_name,birth_date)
-    VALUES ('Russell Crowe','04-07-1964');
-INSERT INTO actors(full_name,birth_date)
-    VALUES ('Joaquin Phoenix','10-28-1974');
-INSERT INTO actors(full_name,birth_date)
-    VALUES ('Al Pacino','04-25-1940');
-INSERT INTO actors(full_name,birth_date)
-    VALUES ('Robert de Niro','08-17-1943');
+INSERT INTO actors(full_name,country,male)
+    VALUES ('Johnny Depp','USA',true);
+INSERT INTO actors(full_name,country,male)
+    VALUES ('Winona Ryder','USA',false);
+INSERT INTO actors(full_name,country,male)
+    VALUES ('Russell Crowe','Australia',true);
+INSERT INTO actors(full_name,country,male)
+    VALUES ('Joaquin Phoenix','USA',true);
+INSERT INTO actors(full_name,country,male)
+    VALUES ('Al Pacino','USA',true);
+INSERT INTO actors(full_name,country,male)
+    VALUES ('Robert de Niro','USA',true);
 
 COMMIT;
 

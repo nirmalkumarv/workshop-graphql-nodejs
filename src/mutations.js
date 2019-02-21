@@ -17,15 +17,15 @@ export const addMovie = (parentValue, {request}, ctx) => {
 };
 
 export const addActor = (parentValue, {request}, ctx) => {
-    return db.query("INSERT INTO actors(full_name,birth_date) " +
-        "VALUES ($1,$2) RETURNING id ",
-        [request.fullName, request.birthday])
+    return db.query("INSERT INTO actors(full_name,country,male) " +
+        "VALUES ($1,$2,$3) RETURNING id ",
+        [request.fullName, request.country, request.genre === 'male'])
         .then(a => {
             let actor = {
                 ...request,
                 id: a.rows[0].id,
             }
-            return
+            return actor
         }).catch(e => {
             console.error(e.stack)
             return e

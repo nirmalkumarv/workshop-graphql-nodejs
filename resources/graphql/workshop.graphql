@@ -87,8 +87,10 @@ type Director{
 input ActorRequest {
     "Full name of the director"
     fullName: String!
-    "Date when the actor was born"
-    age: String
+    "Country in which the actor was born"
+    country: String
+    "Gender of actor: Supported values are male or female"
+    gender: String
 }
 
 """Actor details"""

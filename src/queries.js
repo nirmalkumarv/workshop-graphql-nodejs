@@ -24,7 +24,8 @@ export const listActors = (parentValue, args, ctx) => {
                 return {
                     id: a.id,
                     fullName: a.full_name,
-                    birthday: a.birth_date,
+                    country: a.country,
+                    gender: a.genre ? 'male' : 'female'
                 }
             });
         }).catch(e => {
@@ -78,7 +79,8 @@ export const listActorsForMovie = (movieId, total) => {
                 return {
                     id: a.id,
                     fullName: a.full_name,
-                    birthday: a.birth_date,
+                    country: a.country,
+                    gender: a.genre ? 'male' : 'female',
                 }
             })
 
