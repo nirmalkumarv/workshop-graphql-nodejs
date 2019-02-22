@@ -80,7 +80,7 @@ export const listActorsForMovie = (movieId, total) => {
                     id: a.id,
                     fullName: a.full_name,
                     country: a.country,
-                    gender: a.genre ? 'male' : 'female',
+                    gender: a.male ? 'male' : 'female',
                 }
             })
 
