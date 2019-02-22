@@ -36,6 +36,10 @@ type Query {
     listMovies:[Movie!]
     """It returns the movie with the fiven id"""
     getMovie("Movie identifier" movieId:ID!):Movie
+    """It returns the list of people"""
+    listPeople:[Person!]
+    """It returns the list of items"""
+    listItems:[Item!]
 }
 
 """Available mutations for Workshop API"""
@@ -54,6 +58,7 @@ type Subscription {
     """It returns the movies for a given director"""
     listenDirectorMovies(directorId:ID!):Movie!
     listenRates(movieId:ID!):Movie!
+
 }
 
 
@@ -95,7 +100,7 @@ type Movie {
 }
 
 """Director details"""
-type Director{
+type Director implements Person{
     "Unique identifier for each director"
     id: ID!
     "Full name of the director"
@@ -116,7 +121,7 @@ input ActorRequest {
 }
 
 """Actor details"""
-type Actor {
+type Actor implements Person{
     "Unique identifier for each actor"
     id: ID!
     "Full name of the actor"
@@ -132,3 +137,14 @@ input MovieRateRequest {
     userEmail:String!
     score:Int!
 }
+
+interface Person {
+    "Unique identifier for each actor"
+    id: ID!
+    "Full name of the actor"
+    fullName: String!
+    "Country in which the actor was born"
+    country: String
+}
+
+union Item = Movie | Actor

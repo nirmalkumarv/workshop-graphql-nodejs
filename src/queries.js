@@ -53,6 +53,22 @@ export const listMovies = (parentValue, args, ctx) => {
 
 };
 
+export const listPeople = (parentValue, args, ctx) => {
+    return listActors().then(actors => {
+        return listDirectors().then(directors => {
+            return actors.concat(directors);
+        });
+    });
+};
+
+export const listItems = (parentValue, args, ctx) => {
+    return listMovies().then(movies => {
+        return listActors().then(actors => {
+            return movies.concat(actors);
+        });
+    });
+};
+
 export const getMovie = (parentValue, {movieId}, ctx) => {
     return db.query('SELECT * FROM movies WHERE id=$1', [movieId])
         .then(m => {

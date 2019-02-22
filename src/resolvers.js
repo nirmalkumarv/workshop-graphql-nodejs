@@ -5,7 +5,9 @@ import {
     listActors,
     listMovies,
     getMovie,
-    getRateForMovie
+    getRateForMovie,
+    listPeople,
+    listItems,
 } from './queries';
 import {addMovie, addActor, deleteActor, rateMovie} from './mutations';
 import {listenDirectorMovies, listenRates} from './subscriptions';
@@ -26,10 +28,28 @@ export default {
             return await getRateForMovie(id)
         }
     },
+    Person: {
+        __resolveType(person, context, info){
+            if(person.gender){
+                return 'Actor';
+            }
+            return 'Director'
+        },
+    },
+    Item: {
+        __resolveType(item, context, info){
+            if (item.title){
+                return 'Movie'
+            }
+            return 'Actor'
+        },
+    },
     Query: {
         listDirectors,
         listActors,
         listMovies,
+        listPeople,
+        listItems,
         getMovie,
     },
     Mutation: {
