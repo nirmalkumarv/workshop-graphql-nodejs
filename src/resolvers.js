@@ -26,7 +26,8 @@ export default {
         },
         rate: async ({id}) => {
             return await getRateForMovie(id)
-        }
+        },
+        budget: ({ budget }, { currency }) => currency === 'Euro' ? budget : budget * 1.14
     },
     Person: {
         __resolveType(person, context, info){

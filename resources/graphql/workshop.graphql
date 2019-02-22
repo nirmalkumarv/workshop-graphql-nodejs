@@ -17,6 +17,11 @@ enum Gender {
     female
 }
 
+enum Currency {
+    Dollar
+    Euro
+}
+
 """Possible values for movie genres"""
 enum Genre {
     Drama
@@ -89,7 +94,7 @@ type Movie {
     "Genre for the movie, supported values should be: SciFi, Drama, Comedy or Action"
     genre: Genre
     "Budget for the movie, the value is provided in Euro"
-    budget: Float!
+    budget(currency:Currency=Euro): Float!
     "URL in which we can watch the thriller of this movie"
     thriller: Url
     "The director details of the movie"
