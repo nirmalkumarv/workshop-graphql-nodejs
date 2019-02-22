@@ -7,6 +7,11 @@ schema {
     subscription: Subscription
 
 }
+directive @uppercase on FIELD_DEFINITION
+
+directive @auth (
+    required: String!
+) on FIELD_DEFINITION
 
 """This type is used for defining url's"""
 scalar Url
@@ -88,7 +93,7 @@ type Movie {
     "Unique identifier for each movie"
     id: ID!
     "Name of the movie"
-    title: String!
+    title: String! @uppercase
     "Year when the movie was released"
     year: Int
     "Genre for the movie, supported values should be: SciFi, Drama, Comedy or Action"
@@ -101,7 +106,7 @@ type Movie {
     director: Director!
     "List of actors for the movie"
     actors("Total of returned actors" total:Int=1): [Actor!]
-    rate:Float
+    rate:Float @auth(required:"admin")
 }
 
 """Director details"""

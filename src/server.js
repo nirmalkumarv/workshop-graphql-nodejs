@@ -6,6 +6,15 @@ import config from './config';
 
 const server = new ApolloServer({
     schema,
+    context: ({req}) => {
+        let role = ""
+        if (req) {
+            role= req.headers.role
+        }
+        return {
+            role,
+        }
+    },
 });
 server.applyMiddleware({app});
 const httpServer = createServer(app);

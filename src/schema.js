@@ -1,3 +1,5 @@
+import {AuthDirective, UppercaseDirective} from "./directives";
+
 const {importSchema} = require('graphql-import');
 import {makeExecutableSchema} from 'apollo-server-express';
 import resolvers from './resolvers';
@@ -9,11 +11,9 @@ const typeDefs = importSchema(config.get('graphql.schema'));
 export default makeExecutableSchema({
     typeDefs,
     resolvers,
-    context: ({req}) => {
-        if (req) {
-            userEmail: req.headers.UserEmail
-        }
+    schemaDirectives: {
+        auth: AuthDirective,
+        uppercase: UppercaseDirective,
     },
-    schemaDirectives: {},
     resolverValidationOptions: {requireResolversForResolveType: false},
 });
