@@ -5,9 +5,10 @@ import {
     listActors,
     listMovies,
     getMovie,
-    getRateForMovie
+    getRateForMovie,
+    getMovieRate
 } from './queries';
-import {addMovie, addActor, deleteActor, rateMovie} from './mutations';
+import {addMovie, addActor, deleteActor, rateMovie, addDirector, deleteDirector} from './mutations';
 import {listenDirectorMovies, listenRates} from './subscriptions';
 import {Url} from "./scalars";
 
@@ -31,11 +32,14 @@ export default {
         listActors,
         listMovies,
         getMovie,
+        getMovieRate,
     },
     Mutation: {
         addMovie,
         addActor,
         deleteActor,
+        addDirector,
+        deleteDirector,
         rateMovie,
     },
     Subscription: {

@@ -36,6 +36,7 @@ type Query {
     listMovies:[Movie!]
     """It returns the movie with the fiven id"""
     getMovie("Movie identifier" movieId:ID!):Movie
+    getMovieRate(movieId:ID!):MovieRate
 }
 
 """Available mutations for Workshop API"""
@@ -46,6 +47,10 @@ type Mutation {
     addActor(request:ActorRequest):Actor!
     """I deletes an actor with the fiven identifier"""
     deleteActor("Identifier of the actor" actorId:ID!):[Actor!]
+    """I adds a new actor"""
+    addDirector(request:DirectorRequest):Director!
+    """I deletes the director with the fiven identifier"""
+    deleteDirector("Identifier of the director" directorId:ID!):[Director!]
     rateMovie(request:MovieRateRequest!):Movie!
 }
 
@@ -104,6 +109,14 @@ type Director{
     country: String
 }
 
+"""Director creation request"""
+input DirectorRequest{
+    "Full name of the director"
+    fullName: String!
+    "Country in which the director was born"
+    country: String
+}
+
 """Actor creation info"""
 input ActorRequest {
     "Full name of the director"
@@ -131,4 +144,14 @@ input MovieRateRequest {
     movieId:ID!
     userEmail:String!
     score:Int!
+}
+
+type Rate {
+    email:String!
+    score: Int
+}
+
+type MovieRate {
+    rate: Float
+    rates:[Rate!]
 }

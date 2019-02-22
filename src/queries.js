@@ -119,3 +119,27 @@ export const getDirectorForMovie = (movieId) => {
             return e
         });
 };
+
+export const getMovieRate = (parentValue, {movieId}, ctx, info) => {
+    return db.query('SELECT * FROM movies_rates WHERE movie_id=$1', [movieId])
+        .then(ratesMap => {
+            let score = 0.00
+            let count = 0
+            let rates = ratesMap.rows.map(s => {
+                score += s.score
+                count += 1
+                return {
+                    score: s.score,
+                    email: s.email,
+                }
+            });
+            return {
+                rate: score / count,
+                rates
+            }
+
+        }).catch(e => {
+            console.error(e.stack)
+            return 0.00
+        });
+}
