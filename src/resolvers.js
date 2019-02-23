@@ -24,18 +24,17 @@ export default {
         actors: async ({id}, {total}) => {
             return await listActorsForMovie(id, total)
         },
-        budget: ({budget}, {currency}) => currency === 'Euro' ? budget : budget * 1.14
-        },
+        budget: ({budget}, {currency}) => currency === 'Euro' ? budget : budget * 1.14,
         rate: async ({id}) => {
             return await getRateForMovie(id)
-        }
+        },
     },
     Query: {
         listDirectors,
         listActors,
         listMovies,
         getMovie,
-        getMovieRate,
+        getMovieRate
     },
     Mutation: {
         addMovie,
@@ -43,10 +42,10 @@ export default {
         deleteActor,
         addDirector,
         deleteDirector,
-        rateMovie,
+        rateMovie
     },
     Subscription: {
         listenDirectorMovies,
-        listenRates,
+        listenRates
     }
 }
