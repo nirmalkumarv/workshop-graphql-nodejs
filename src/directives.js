@@ -30,16 +30,16 @@ export class AuthDirective extends SchemaDirectiveVisitor {
     }
 }
 
-export class UppercaseDirective extends SchemaDirectiveVisitor {
+    export class UppercaseDirective extends SchemaDirectiveVisitor {
 
-    visitFieldDefinition(field, details) {
-        const {resolve = defaultFieldResolver} = field;
-        field.resolve = async function (...args) {
-            const result = await resolve.apply(this, args);
-            if (typeof result === "string") {
-                return result.toUpperCase();
-            }
-            return result;
-        };
+        visitFieldDefinition(field, details) {
+            const {resolve = defaultFieldResolver} = field;
+            field.resolve = async function (...args) {
+                const result = await resolve.apply(this, args);
+                if (typeof result === "string") {
+                    return result.toUpperCase();
+                }
+                return result;
+            };
+        }
     }
-}
