@@ -1,6 +1,6 @@
 import db from "./db";
-import {getMovie, listActors} from "./queries";
-import {ON_NEWMOVIE,ON_MOVIERATE, pubsub} from "./events";
+import {getMovie, listActors, listDirectors} from "./queries";
+import {ON_NEWMOVIE, ON_MOVIERATE, pubsub} from "./events";
 
 export const addMovie = (parentValue, {request}, ctx) => {
     return db.query("INSERT INTO movies(title,release_year,genre,budget,thriller,director_id) " +
@@ -37,6 +37,33 @@ export const deleteActor = (parentValue, {actorId}, ctx) => {
         [actorId])
         .then(_ => {
             return listActors({}, {}, {})
+        }).catch(e => {
+            console.error(e.stack)
+            return e
+        });
+};
+
+export const addDirector = (parentValue, {request}, ctx) => {
+    return db.query("INSERT INTO directors(full_name,country) " +
+        "VALUES ($1,$2) RETURNING id ",
+        [request.fullName, request.country])
+        .then(a => {
+            let director = {
+                ...request,
+                id: a.rows[0].id,
+            }
+            return director
+        }).catch(e => {
+            console.error(e.stack)
+            return e
+        });
+};
+
+export const deleteDirector = (parentValue, {directorId}, ctx) => {
+    return db.query("DELETE from directors WHERE id=$1",
+        [directorId])
+        .then(_ => {
+            return listDirectors({}, {}, {})
         }).catch(e => {
             console.error(e.stack)
             return e
