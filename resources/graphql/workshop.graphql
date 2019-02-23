@@ -13,6 +13,9 @@ directive @auth (
     required: String!
 ) on FIELD_DEFINITION
 
+
+scalar Email
+
 """This type is used for defining url's"""
 scalar Url
 
@@ -50,6 +53,7 @@ type Query {
     listPeople:[Person!]
     """It returns the list of items"""
     listItems:[Item!]
+    getMovieRate(movieId:ID!):MovieRate
 }
 
 """Available mutations for Workshop API"""
@@ -60,6 +64,10 @@ type Mutation {
     addActor(request:ActorRequest):Actor!
     """I deletes an actor with the fiven identifier"""
     deleteActor("Identifier of the actor" actorId:ID!):[Actor!]
+    """I adds a new actor"""
+    addDirector(request:DirectorRequest):Director!
+    """I deletes the director with the fiven identifier"""
+    deleteDirector("Identifier of the director" directorId:ID!):[Director!]
     rateMovie(request:MovieRateRequest!):Movie!
 }
 
@@ -119,6 +127,14 @@ type Director implements Person{
     country: String
 }
 
+"""Director creation request"""
+input DirectorRequest{
+    "Full name of the director"
+    fullName: String!
+    "Country in which the director was born"
+    country: String
+}
+
 """Actor creation info"""
 input ActorRequest {
     "Full name of the director"
@@ -144,7 +160,7 @@ type Actor implements Person{
 
 input MovieRateRequest {
     movieId:ID!
-    userEmail:String!
+    userEmail:Email!
     score:Int!
 }
 
@@ -158,3 +174,13 @@ interface Person {
 }
 
 union Item = Movie | Actor
+
+type Rate {
+    email:Email!
+    score: Int
+}
+
+type MovieRate {
+    rate: Float
+    rates:[Rate!]
+}
