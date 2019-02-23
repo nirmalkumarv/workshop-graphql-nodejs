@@ -8,6 +8,9 @@ schema {
 
 }
 
+
+scalar Email
+
 """This type is used for defining url's"""
 scalar Url
 
@@ -142,12 +145,12 @@ type Actor {
 
 input MovieRateRequest {
     movieId:ID!
-    userEmail:String!
+    userEmail:Email!
     score:Int!
 }
 
 type Rate {
-    email:String!
+    email:Email!
     score: Int
 }
 

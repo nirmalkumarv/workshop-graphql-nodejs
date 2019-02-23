@@ -10,11 +10,12 @@ import {
 } from './queries';
 import {addMovie, addActor, deleteActor, rateMovie, addDirector, deleteDirector} from './mutations';
 import {listenDirectorMovies, listenRates} from './subscriptions';
-import {Url} from "./scalars";
+import {Url,Email} from "./scalars";
 
 
 export default {
     Url: Url,
+    Email: Email,
     Movie: {
         director: async ({id}) => {
             console.log(id)
