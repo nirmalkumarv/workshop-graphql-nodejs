@@ -13,7 +13,8 @@ export default {
         },
         actors: async ({id}, {total}) => {
             return await listActorsForMovie(id, total)
-        }
+        },
+        budget: ({budget}, {currency}) => currency === 'Euro' ? budget : budget * 1.14
     },
     Query: {
         listDirectors,
