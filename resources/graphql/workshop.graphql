@@ -19,15 +19,16 @@ scalar Email
 """This type is used for defining url's"""
 scalar Url
 
+"""Possible values for currency"""
+enum Currency {
+    Euro
+    Dollar
+}
+
 """Possible values for gender"""
 enum Gender {
     male
     female
-}
-
-enum Currency {
-    Euro
-    Dollar
 }
 
 """Possible values for movie genres"""
@@ -94,8 +95,8 @@ input MovieRequest {
     thriller: Url
     "Identifier of director"
     directorId: ID!
+    actorsId:[ID!]
 }
-
 """Movie details"""
 type Movie {
     "Unique identifier for each movie"
@@ -160,7 +161,7 @@ type Actor implements Person{
 
 input MovieRateRequest {
     movieId:ID!
-    userEmail:Email!
+    email:Email!
     score:Int!
 }
 

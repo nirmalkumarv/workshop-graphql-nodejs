@@ -54,7 +54,7 @@ export default {
         listPeople,
         listItems,
         getMovie,
-        getMovieRate,
+        getMovieRate
     },
     Mutation: {
         addMovie,
@@ -62,10 +62,10 @@ export default {
         deleteActor,
         addDirector,
         deleteDirector,
-        rateMovie,
+        rateMovie
     },
     Subscription: {
         listenDirectorMovies,
-        listenRates,
+        listenRates
     }
 }

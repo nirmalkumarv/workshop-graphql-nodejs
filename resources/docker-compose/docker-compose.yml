@@ -11,7 +11,8 @@ services:
     links:
       - database
     volumes:
-      - ./../../:/usr/src/app
+      - ./../../src:/usr/src/app/src
+      - ./../../.babelrc:/usr/src/app/.babelrc
       - ./api/config.json:/opt/config/config.json
       - ./../graphql/workshop.graphql:/opt/config/workshop.graphql
     environment:
