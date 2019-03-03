@@ -1,4 +1,4 @@
-import {AuthDirective, UppercaseDirective} from "./directives";
+import {UppercaseDirective, MultiplyDirective} from "./directives";
 
 const {importSchema} = require('graphql-import');
 import {makeExecutableSchema} from 'apollo-server-express';
@@ -12,8 +12,8 @@ export default makeExecutableSchema({
     typeDefs,
     resolvers,
     schemaDirectives: {
-        auth: AuthDirective,
         uppercase: UppercaseDirective,
+        multiply: MultiplyDirective,
     },
     resolverValidationOptions: {requireResolversForResolveType: false},
 });
