@@ -11,7 +11,7 @@ install:
 build:
 	$(DOCKER_BUILD)
 
-run: build ;
+deploy: build ;
 	$(DOCKER_RUN)
 
 database: ;
