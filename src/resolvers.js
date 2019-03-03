@@ -1,5 +1,5 @@
 import {listActorsForMovie, getDirectorForMovie, listDirectors, listActors, listMovies, getMovie} from './queries';
-import {addMovie, addActor, deleteActor} from './mutations';
+import {addMovie, addDirector, deleteDirector} from './mutations';
 import {listenDirectorMovies} from './subscriptions';
 
 
@@ -21,8 +21,8 @@ export default {
     },
     Mutation: {
         addMovie,
-        addActor,
-        deleteActor,
+        addDirector,
+        deleteDirector,
     },
     Subscription: {
         listenDirectorMovies,

@@ -1,5 +1,5 @@
 import db from "./db";
-import {getMovie, listActors} from "./queries";
+import {getMovie} from "./queries";
 import {ON_NEWMOVIE, pubsub} from "./events";
 
 export const addMovie = (parentValue, {request}, ctx) => {
@@ -16,27 +16,27 @@ export const addMovie = (parentValue, {request}, ctx) => {
         });
 };
 
-export const addActor = (parentValue, {request}, ctx) => {
-    return db.query("INSERT INTO actors(full_name,country,male) " +
-        "VALUES ($1,$2,$3) RETURNING id ",
-        [request.fullName, request.country, request.genre === 'male'])
+export const addDirector = (parentValue, {request}, ctx) => {
+    return db.query("INSERT INTO directors(full_name,country) " +
+        "VALUES ($1,$2) RETURNING id ",
+        [request.fullName, request.country])
         .then(a => {
-            let actor = {
+            let director = {
                 ...request,
                 id: a.rows[0].id,
             }
-            return actor
+            return director
         }).catch(e => {
             console.error(e.stack)
             return e
         });
 };
 
-export const deleteActor = (parentValue, {actorId}, ctx) => {
-    return db.query("DELETE from actors WHERE id=$1",
-        [actorId])
+export const deleteDirector = (parentValue, {directorId}, ctx) => {
+    return db.query("DELETE from directors WHERE id=$1",
+        [directorId])
         .then(_ => {
-            return listActors({}, {}, {})
+            return listDirectors({}, {}, {})
         }).catch(e => {
             console.error(e.stack)
             return e

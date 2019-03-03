@@ -8,10 +8,6 @@ export const listenDirectorMovies = {
         }
     ),
     resolve: (payload, args, context, info) => {
-        console.log(payload)
-        console.log(args)
-        console.log(context)
-        console.log(info)
         return payload;
     }
 }

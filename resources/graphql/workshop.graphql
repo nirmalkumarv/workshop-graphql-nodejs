@@ -25,9 +25,9 @@ type Mutation {
     """I adds a new movie"""
     addMovie(request:MovieRequest):Movie!
     """I adds a new actor"""
-    addActor(request:ActorRequest):Actor!
-    """I deletes an actor with the fiven identifier"""
-    deleteActor("Identifier of the actor" actorId:ID!):[Actor!]
+    addDirector(request:DirectorRequest):Director!
+    """I deletes the director with the fiven identifier"""
+    deleteDirector("Identifier of the director" directorId:ID!):[Director!]
 }
 
 """Available subscriptions for Workshop API"""
@@ -83,14 +83,12 @@ type Director{
     country: String
 }
 
-"""Actor creation info"""
-input ActorRequest {
+"""Director creation request"""
+input DirectorRequest{
     "Full name of the director"
     fullName: String!
-    "Country in which the actor was born"
+    "Country in which the director was born"
     country: String
-    "Gender of actor: Supported values are male or female"
-    gender: String
 }
 
 """Actor details"""

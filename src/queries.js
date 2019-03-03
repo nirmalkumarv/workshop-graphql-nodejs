@@ -17,7 +17,6 @@ export const listDirectors = (parentValue, args, ctx) => {
 };
 
 export const listActors = (parentValue, args, ctx) => {
-    console.log('demo')
     return db.query('SELECT * FROM actors')
         .then(res => {
             return res.rows.map(a => {
