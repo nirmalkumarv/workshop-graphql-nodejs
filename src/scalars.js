@@ -5,11 +5,9 @@ export const Url = new GraphQLScalarType({
     name: 'Url',
     description: 'A valid HTTP Url',
     serialize(value) {
-        console.log(`serialize ${value}`)
         return value
     },
     parseValue(value) {
-        console.log(`parseValue ${value}`)
         return value
     },
     // ast value is always in string format
