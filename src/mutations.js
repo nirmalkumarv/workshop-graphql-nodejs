@@ -7,6 +7,13 @@ export const addMovie = (parentValue, {request}, ctx) => {
         "VALUES ($1,$2,$3,$4,$5,$6) RETURNING id ",
         [request.title, request.year, request.genre, request.budget, request.thriller, request.directorId])
         .then(m => {
+            console.log(request.actorsId);
+            request.actorsId.forEach(actorId => {
+                console.log(`Adding actor ${actorId}`)
+                db.query("INSERT INTO movies_actors(movie_id,actor_id) " +
+                    "VALUES ($1,$2)",
+                    [m.rows[0].id, actorId]);
+            });
             let movie = getMovie({}, {movieId: m.rows[0].id}, {})
             pubsub.publish(`${ON_NEWMOVIE}.${request.directorId}`, movie);
             return movie
@@ -73,7 +80,7 @@ export const deleteDirector = (parentValue, {directorId}, ctx) => {
 export const rateMovie = (parentValue, {request}, ctx) => {
     return db.query("INSERT INTO movies_rates(movie_id,email,score) " +
         "VALUES ($1,$2,$3)",
-        [request.movieId, request.userEmail, request.score])
+        [request.movieId, request.email, request.score])
         .then(a => {
             let movie = getMovie({}, {movieId: request.movieId}, {})
             pubsub.publish(`${ON_MOVIERATE}.${request.movieId}`, movie);
