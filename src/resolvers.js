@@ -8,7 +8,6 @@ export default {
     Url: Url,
     Movie: {
         director: async ({id}) => {
-            console.log(id)
             return await getDirectorForMovie(id)
         },
         actors: async ({id}, {total}) => {
