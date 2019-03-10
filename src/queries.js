@@ -92,7 +92,6 @@ export const listActorsForMovie = (movieId, total) => {
 export const getDirectorForMovie = (movieId) => {
     return db.query('SELECT d.* FROM directors AS d, movies as M WHERE m.id =$1 AND m.director_id=d.id', [movieId])
         .then(res => {
-            console.log(res)
             return {
                 id: res.rows[0].id,
                 fullName: res.rows[0].full_name,
