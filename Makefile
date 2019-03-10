@@ -17,7 +17,8 @@ deploy: build ;
 database: ;
 	$(DOCKER_DATABASE)
 
-stop: ;
+.PHONY: docker-stop
+docker-stop: ;
 	$(DOCKER_STOP)
 
 clean:
