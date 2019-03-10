@@ -16,6 +16,7 @@ export const addMovie = (parentValue, {request}, ctx) => {
             });
             let movie = getMovie({}, {movieId: m.rows[0].id}, {})
             pubsub.publish(`${ON_NEWMOVIE}.${request.directorId}`, movie);
+
             return movie
         }).catch(e => {
             console.error(e.stack)
