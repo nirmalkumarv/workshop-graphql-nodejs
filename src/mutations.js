@@ -7,9 +7,7 @@ export const addMovie = (parentValue, {request}, ctx) => {
         "VALUES ($1,$2,$3,$4,$5,$6) RETURNING id ",
         [request.title, request.year, request.genre, request.budget, request.thriller, request.directorId])
         .then(m => {
-            console.log(request.actorsId);
             request.actorsId.forEach(actorId => {
-                console.log(`Adding actor ${actorId}`)
                 db.query("INSERT INTO movies_actors(movie_id,actor_id) " +
                     "VALUES ($1,$2)",
                     [m.rows[0].id, actorId]);
