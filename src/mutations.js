@@ -3,9 +3,9 @@ import {getMovie} from "./queries";
 import {ON_NEWMOVIE, pubsub} from "./events";
 
 export const addMovie = (parentValue, {request}, ctx) => {
-    return db.query("INSERT INTO movies(title,release_year,genre,budget,thriller,director_id) " +
+    return db.query("INSERT INTO movies(title,release_year,genre,budget,trailer,director_id) " +
         "VALUES ($1,$2,$3,$4,$5,$6) RETURNING id ",
-        [request.title, request.year, request.genre, request.budget, request.thriller, request.directorId])
+        [request.title, request.year, request.genre, request.budget, request.trailer, request.directorId])
         .then(m => {
             let movie = getMovie({}, {movieId: m.rows[0].id}, {})
             pubsub.publish(`${ON_NEWMOVIE}.${request.directorId}`, movie);
