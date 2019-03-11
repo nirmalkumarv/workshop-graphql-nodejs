@@ -24,7 +24,7 @@ export const listActors = (parentValue, args, ctx) => {
                     id: a.id,
                     fullName: a.full_name,
                     country: a.country,
-                    gender: a.genre ? 'male' : 'female'
+                    gender: a.male ? 'male' : 'female'
                 }
             });
         }).catch(e => {
