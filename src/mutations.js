@@ -7,11 +7,13 @@ export const addMovie = (parentValue, {request}, ctx) => {
         "VALUES ($1,$2,$3,$4,$5,$6) RETURNING id ",
         [request.title, request.year, request.genre, request.budget, request.trailer, request.directorId])
         .then(m => {
-            request.actorsId.forEach(actorId => {
-                db.query("INSERT INTO movies_actors(movie_id,actor_id) " +
-                    "VALUES ($1,$2)",
-                    [m.rows[0].id, actorId]);
-            });
+            if (request.actorsId) {
+                request.actorsId.forEach(actorId => {
+                    db.query("INSERT INTO movies_actors(movie_id,actor_id) " +
+                        "VALUES ($1,$2)",
+                        [m.rows[0].id, actorId]);
+                });
+            }
             let movie = getMovie({}, {movieId: m.rows[0].id}, {})
             pubsub.publish(`${ON_NEWMOVIE}.${request.directorId}`, movie);
             return movie
