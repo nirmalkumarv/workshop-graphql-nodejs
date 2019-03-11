@@ -43,7 +43,7 @@ export const listMovies = (parentValue, args, ctx) => {
                     year: m.release_year,
                     genre: m.genre,
                     budget: m.budget,
-                    thriller: m.thriller,
+                    trailer: m.trailer,
                 }
             });
         }).catch(e => {
@@ -78,7 +78,7 @@ export const getMovie = (parentValue, {movieId}, ctx) => {
                 year: m.rows[0].release_year,
                 genre: m.rows[0].genre,
                 budget: m.rows[0].budget,
-                thriller: m.rows[0].thriller,
+                trailer: m.rows[0].trailer,
             }
         }).catch(e => {
             console.error(e.stack)
