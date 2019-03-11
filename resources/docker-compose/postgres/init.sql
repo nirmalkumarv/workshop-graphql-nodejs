@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS movies (
   release_year  INT,
   genre         VARCHAR(64),
   budget        NUMERIC(28,2),
-  thriller      VARCHAR(256),
+  trailer      VARCHAR(256),
   director_id   INT,
   CONSTRAINT uq_title UNIQUE (title),
   CONSTRAINT fk_movies_director FOREIGN KEY (director_id) REFERENCES directors(id)
@@ -69,10 +69,10 @@ INSERT INTO directors(full_name,country) VALUES ('Clint Eastwood', 'USA');
 INSERT INTO directors(full_name,country) VALUES ('Ridley Scott', 'UK');
 COMMIT;
 
-INSERT INTO movies(title,release_year,genre,budget,thriller,director_id)
+INSERT INTO movies(title,release_year,genre,budget,trailer,director_id)
     VALUES ('Edward Scissorhands',1990,'SciFi',20,'https://www.youtube.com/watch?v=M94yyfWy-KI',1);
 
-INSERT INTO movies(title,release_year,genre,budget,thriller,director_id)
+INSERT INTO movies(title,release_year,genre,budget,trailer,director_id)
     VALUES ('Gladiator',2000,'Drama',103,'https://www.youtube.com/watch?v=owK1qxDselE',7);
 COMMIT;
 

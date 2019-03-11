@@ -81,8 +81,8 @@ input MovieRequest {
     genre: Genre
     "Budget for the movie, the value is provided in Euro"
     budget: Float!
-    "URL in which we can watch the thriller of this movie"
-    thriller: Url
+    "URL in which we can watch the trailer of this movie"
+    trailer: Url
     "Identifier of director"
     directorId: ID!
     actorsId:[ID!]
@@ -99,8 +99,8 @@ type Movie {
     genre: Genre
     "Budget for the movie, the value is provided in Euro"
     budget (currency:Currency=Euro): Float!
-    "URL in which we can watch the thriller of this movie"
-    thriller: Url
+    "URL in which we can watch the trailer of this movie"
+    trailer: Url
     "The director details of the movie"
     director: Director!
     "List of actors for the movie"
