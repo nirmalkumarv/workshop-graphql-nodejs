@@ -47,8 +47,8 @@ input MovieRequest {
     genre: String
     "Budget for the movie, the value is provided in Euro"
     budget: Float!
-    "URL in which we can watch the thriller of this movie"
-    thriller: String
+    "URL in which we can watch the trailer of this movie"
+    trailer: String
     "Identifier of director"
     directorId: ID!
 }
@@ -65,8 +65,8 @@ type Movie {
     genre: String
     "Budget for the movie, the value is provided in Euro"
     budget: Float!
-    "URL in which we can watch the thriller of this movie"
-    thriller: String
+    "URL in which we can watch the trailer of this movie"
+    trailer: String
     "The director details of the movie"
     director: Director!
     "List of actors for the movie"
